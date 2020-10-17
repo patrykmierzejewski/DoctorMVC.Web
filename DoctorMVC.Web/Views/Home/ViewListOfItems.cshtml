@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DoctorMVC.Web.Models.Item>
+
+@{
+    ViewData["Title"] = "ViewListOfItems";
+}
+
+@{
+    Random rnd = new Random();
+    int a = 0;
+    a = rnd.Next(1, 10);
+}
+
+    <div style="color:blueviolet">
+        <h2>Twoja liczba : @a </h2>
+    </div>
+
+<h1>ViewListOfItems</h1>
+    <p>
+        @ViewBag.name
+    </p>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) 
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+        }
+    </tbody>
+
+</table>
