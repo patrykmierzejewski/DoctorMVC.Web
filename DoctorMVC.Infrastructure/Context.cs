@@ -20,7 +20,6 @@ namespace DoctorMVC.Infrastructure
 
         }
 
-        /*Fluend API - do wykorzystania aby wstrzykiwać model builder który wykorzysta konfigurację do relacji*/
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -29,7 +28,7 @@ namespace DoctorMVC.Infrastructure
             //pacjent - wiele wizyt, jedna konkretna wizyta - jeden pacjent.
 
 
-            //relacja 1=1, jeden do jednego
+            //relacja 1=1
             builder.Entity<Doctor>()
                 .HasOne(x => x.doctorConact).WithOne(y => y.Doctor)
                 .HasForeignKey<DoctorConactInformation>(z => z.DoctorRef);
