@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-/*using Microsoft.AspNetCore.Identity.UI;*/
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using DoctorMVC.Application.Interfaces;
 using DoctorMVC.Application.Services;
 using DoctorMVC.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 
 namespace DoctorMVC.Web
 {
@@ -34,9 +34,13 @@ namespace DoctorMVC.Web
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-          
-            services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<Context>();
+
+            /*services.AddIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<Context>();*/
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<Context>()
+                .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
